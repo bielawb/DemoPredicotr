@@ -1,0 +1,15 @@
+
+When Chuck Norris throws exceptions, it’s across the room
+All arrays Chuck Norris declares are of infinite size, because Chuck Norris knows no bounds.
+Chuck Norris doesn’t have disk latency because the hard drive knows to hurry the hell up.
+Chuck Norris writes PowerShell code that optimizes itself.
+Chuck Norris can’t test for -eq because he has no equal.
+Chuck Norris doesn’t need garbage collection because he doesn’t call .Dispose(), he calls .DropKick().
+Chuck Norris’s first program was Stop-Process -Force.
+All browsers support the hex definitions #chuck and #norris for the colors black and blue.
+Chuck Norris can write infinite recursion functions… and have them return.
+Chuck Norris doesn’t use web standards as the web will conform to him.
+Whiteboards are white because Chuck Norris scared them that way.
+Chuck Norris doesn’t do Burn Down charts, he does Smack Down charts.
+Chuck Norris can unit test entire PowerShell script with a single should.
+Chuck Norris’s keyboard doesn’t have a Ctrl key because nothing controls Chuck Norris.

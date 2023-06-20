@@ -1,18 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Reflection;
 using System.Management.Automation;
 using System.Management.Automation.Subsystem;
 using System.Management.Automation.Subsystem.Prediction;
+using System.Management.Automation.Language;
 
 namespace PowerShell.NET.PL {
     public class DemoPredictor : ICommandPredictor
     {
         private readonly Guid _guid;
+        private readonly List<string> _codeSamples;
 
         internal DemoPredictor (string guid)
         {
             _guid = new Guid(guid);
+            _codeSamples = new List<string>{};
+            string? moduleFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (string.IsNullOrEmpty(moduleFolder))
+            {
+                return;
+            }
+            string codeSamplePath = Path.Combine(moduleFolder, "CodeSamples.txt");
+            string[]? codeSamples = File.ReadAllLines(codeSamplePath);
+
+            if (codeSamples is null)
+            {
+                return;
+            }
+
+            foreach (string sample in codeSamples)
+            {
+                _codeSamples.Add(sample);
+            }
         }
 
         /// <summary>
@@ -45,9 +66,23 @@ namespace PowerShell.NET.PL {
                 return default;
             }
 
-            return new SuggestionPackage(new List<PredictiveSuggestion>{
-                new PredictiveSuggestion(string.Concat(input, " HELLO PSCONF"))
-            });
+            List<PredictiveSuggestion> suggestions = new List<PredictiveSuggestion>{};
+
+            foreach (string codeSample in _codeSamples)
+            {
+                if (codeSample.ToLower().Contains(input.ToLower()))
+                {
+                    suggestions.Add(new PredictiveSuggestion(codeSample));
+                }
+            }
+            if (suggestions.Count == 0)
+            {
+                return default;
+            }
+            else
+            {
+                return new SuggestionPackage(suggestions);
+            }
         }
 
         #region "interface methods for processing feedback"
